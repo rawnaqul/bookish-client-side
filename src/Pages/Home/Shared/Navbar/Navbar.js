@@ -36,8 +36,11 @@ const Navbar = () => {
                                 {menuItem}
                             </ul>
                         </div>
-                        <Link to='/' className="uppercase text-2xl font-semibold rounded-md  p-2"><img src={logo} alt=''></img></Link>
-                        <h2 className='text-3xl font-semibold font-serif'>Bookish</h2>
+                        <Link to='/' className="uppercase text-2xl font-semibold rounded-md  p-2 flex">
+                            <img src={logo} alt=''></img>
+                            <h2 className='text-3xl font-semibold font-serif mx-2'>Bookish</h2>
+                        </Link>
+
                     </div>
                     <div className="navbar-end hidden lg:flex">
                         <ul className="menu menu-horizontal p-0">

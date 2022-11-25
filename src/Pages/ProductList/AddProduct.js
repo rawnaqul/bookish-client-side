@@ -56,7 +56,7 @@ const AddProduct = () => {
             yearsOfUse,
         }
 
-        fetch('http://localhost:5000/products', {
+        fetch('https://server-bice-beta.vercel.app/products', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

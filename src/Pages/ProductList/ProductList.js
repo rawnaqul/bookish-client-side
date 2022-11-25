@@ -5,10 +5,12 @@ const ProductList = () => {
     const products = useLoaderData();
     console.log(products);
     const categoryName = products[0].category;
+    const dated = new Date();
+    console.log(dated);
     return (
         <div className='mt-24 container mx-auto'>
             <h1 className='text-3xl font-semibold font-serif text-slate-600 bg-green-200 p-5 rounded-xl text-center'>Available {categoryName} are shown below!</h1>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-24 container mx-auto'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 mt-24 container mx-auto'>
                 {
                     products.map(product => <label htmlFor={`my-modal-${product._id}`} key={product._id} className="card w-96 bg-base-100 shadow-xl cursor-pointer">
                         <figure><img src={product.image} alt="pictures of books" className='h-96' /></figure>
