@@ -11,8 +11,6 @@ const Navbar = () => {
     const menuItem = <React.Fragment>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/blogs'>Blogs</Link></li>
-        <li><Link to='/appointme'>Appointment</Link></li>
-        <li><Link to='/reviews'>Reviews</Link></li>
         <li><Link to='/contact'>Contact Us</Link></li>
         {user ?
             <li onClick={() => { logOut() }}><Link>Sign Out</Link></li>
@@ -39,6 +37,7 @@ const Navbar = () => {
                             </ul>
                         </div>
                         <Link to='/' className="uppercase text-2xl font-semibold rounded-md  p-2"><img src={logo} alt=''></img></Link>
+                        <h2 className='text-3xl font-semibold font-serif'>Bookish</h2>
                     </div>
                     <div className="navbar-end hidden lg:flex">
                         <ul className="menu menu-horizontal p-0">

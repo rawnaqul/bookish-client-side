@@ -8,7 +8,7 @@ const Contact = () => {
             <div className='container mx-auto text-center'>
                 <div className='my-auto mb-10' >
                     <h4 className='font-bold text-2xl text-orange-600 mb-5'>Contact Us</h4>
-                    <h2 className='font-bold text-3xl lg:text-4xl text-black'>Stay connected with us!</h2>
+                    <h2 className='font-bold text-3xl lg:text-4xl text-black font-serif'>Stay connected with us!</h2>
                 </div>
                 <div className='flex flex-col lg:w-4/12 w-10/12 mx-auto mb-5'>
                     <input type="email" placeholder="Type your email here" className="input w-ful " />

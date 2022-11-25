@@ -89,7 +89,7 @@ const Signup = () => {
                     <br />
                     <button className='btn bg-slate-600/[.9]'>Sign Up</button>
                     <br />
-                    <p className='text-sm'> Already have an account? <span className='text-blue-400'><Link to='/login'>Log In here!</Link></span> </p>
+                    <p className='text-sm'> Already have an account? <span className='text-blue-400'><Link to='/login'>Log In now!</Link></span> </p>
                     <div className='divider'>Or</div>
                     <button className='btn btn-outline'>Sign Up with Google</button>
                 </form>

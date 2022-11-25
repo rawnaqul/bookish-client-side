@@ -16,7 +16,7 @@ const Home = () => {
 
             <br />
             <div className='container mx-auto'>
-                <h2 className='text-5xl font-semibold text-center'>Browse Product Categories</h2>
+                <h2 className='text-5xl font-semibold text-center font-serif'>Browse Product Categories</h2>
                 <br />
                 <Categories
                     categories={categories}

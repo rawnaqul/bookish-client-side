@@ -11,7 +11,7 @@ const ProductList = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-24 container mx-auto'>
                 {
                     products.map(product => <label htmlFor={`my-modal-${product._id}`} key={product._id} className="card w-96 bg-base-100 shadow-xl cursor-pointer">
-                        <figure><img src={product.image} alt="pictures of books" /></figure>
+                        <figure><img src={product.image} alt="pictures of books" className='h-96' /></figure>
                         <div className="card-body">
                             <h2 className="card-title">
                                 {product.name}
@@ -30,10 +30,10 @@ const ProductList = () => {
                                     <figure className=''><img src={product.image} alt="pictures of books" className='rounded' /></figure>
                                     <br />
                                     <h3 className="text-lg font-bold">{product.name}</h3>
+                                    <p className='text-thin text-slate-400'><span className=''>Posted On:</span> {product.postDate}</p>
                                     <p className=""><span className='text-thin text-slate-400'>Details:</span> {product.description}..</p>
                                     <p><span className='text-thin text-slate-400'>Original Price:</span> ${product.originalPrice}</p>
                                     <p><span className='text-thin text-slate-400'>Years Of Use:</span> {product.yearsOfUse}</p>
-                                    <p><span className='text-thin text-slate-400'>Posted On:</span> {product.postDate}</p>
                                     <p><span className='text-thin text-slate-400'>Seller Name:</span> {product.seller}</p>
                                     <p><span className='text-thin text-slate-400'>Seller Email:</span> {product.email}</p>
                                     <p><span className='text-thin text-slate-400'>Seller Phone Number: </span>+88{product.phone}</p>
