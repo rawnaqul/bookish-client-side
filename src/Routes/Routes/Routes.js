@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layout/Main";
-import AppointmentMain from "../../Pages/Appointment/AppointmentMain";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
+import ProductList from "../../Pages/ProductList/ProductList";
 import Signup from "../../Pages/Signup/Signup";
 
 const router = createBrowserRouter([
@@ -12,6 +12,9 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
+                loader: async () => {
+                    return fetch('https://server-bice-beta.vercel.app/categories')
+                },
                 element: <Home></Home>
             },
             {
@@ -23,9 +26,12 @@ const router = createBrowserRouter([
                 element: <Signup></Signup>
             },
             {
-                path: '/appointme',
-                element: <AppointmentMain></AppointmentMain>
-            }
+                path: '/productlist/:id',
+                loader: async ({ params }) => {
+                    return fetch(`http://localhost:5000/products/${params.id}`)
+                },
+                element: <ProductList></ProductList>
+            },
 
         ]
     }
