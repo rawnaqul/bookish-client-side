@@ -1,31 +1,62 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/Authprovider';
 import toast from 'react-hot-toast';
 
 const Signup = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [signUpError, setSignUpError] = useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/'
 
     const { createUser, upadteUserInfo } = useContext(AuthContext);
 
     const handleSignUp = (data) => {
+        setSignUpError('')
         createUser(data.email, data.password)
             .then(result => {
-                toast.success('kaam hoise')
+                if (result.user) {
+                    toast.success('kaam hoise')
+                }
                 const userInfo = {
                     displayName: data.name,
                     photoURL: data.photoUrl
                 }
                 console.log(userInfo);
                 upadteUserInfo(userInfo)
-                    .then(() => { })
+                    .then(() => {
+                        storeUser(data.name, data.email, data.userRole)
+                    })
                     .catch(err => { console.error(err) })
 
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error);
+                setSignUpError(error.message)
+            });
     }
+
+    //SAVE USER DATA IN DATABASE
+    const storeUser = (name, email, userRole) => {
+        const user = { name, email, userRole, verified: false };
+
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                navigate(from, { replace: true })
+            })
+            .catch(error => console.log(error))
+    }
+
 
     return (
         <div className='p-3'>
@@ -41,9 +72,20 @@ const Signup = () => {
                     <input {...register("email", { required: "Must be a valid email" })} placeholder="Email" type="email" className='input input-bordered w-full' />
                     {errors.email && <p className='text-sm text-red-500 text-left mt-2 ml-1' role="alert">{errors.email?.message}</p>}
                     <br />
+                    <div className='py-3'>
+                        <select {...register("userRole", { required: 'This Field is required' })} className="select select-bordered w-full" placeholder='Sign Up as...'>
+                            <option value="">Sign Up...</option>
+                            <option value="Buyer">Buyer</option>
+                            <option value="Seller">Seller</option>
+                        </select>
+                        {errors.userRole && <p className='text-right text-red-600 my-1 text-xs'>{errors.userRole?.message}</p>}
+                    </div>
+                    <br />
                     <input {...register("password", { required: "Set a Password", minLength: { value: 6, message: "Minimum 6 charachter required" } })} placeholder="Password" type="password" className='input input-bordered w-full' />
                     {errors.password && <p className='text-sm text-red-500 text-left mt-2 ml-1' role="alert">{errors.password?.message}</p>}
                     {/* <Link className='text-sm text-orange-400 my-2 text-left'>Forgot Password?</Link> */}
+                    <br />
+                    <p>{signUpError}</p>
                     <br />
                     <button className='btn bg-slate-600/[.9]'>Sign Up</button>
                     <br />

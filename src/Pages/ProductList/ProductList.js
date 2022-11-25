@@ -50,10 +50,6 @@ const ProductList = () => {
                         </div>
                     </label>)
                 }
-
-
-
-
             </div>
         </div>
     );
