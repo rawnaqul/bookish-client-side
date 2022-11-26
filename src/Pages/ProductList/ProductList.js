@@ -1,14 +1,63 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider/Authprovider';
 
 const ProductList = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
+
+    const { user } = useContext(AuthContext);
+
     const products = useLoaderData();
-    console.log(products);
+    const [bookingModal, setBookingModal] = useState(true);
+
     const categoryName = products[0].category;
+
+    // console date and time
     const dated = new Date();
     console.log(dated);
+
+
+    //booking fuction
+    const handleBooking = e => {
+        e.preventDefault();
+        const form = e.target;
+        const buyerName = form.buyerName.value;
+        const buyerEmail = form.buyerEmail.value;
+        const productName = form.productName.value;
+        const resalePrice = form.resalePrice.value;
+        const meetingLocation = form.meetingLocation.value;
+        const buyerPhone = form.buyerPhone.value;
+
+
+        const bookingInfo = {
+            buyerName,
+            buyerEmail,
+            productName,
+            resalePrice,
+            meetingLocation,
+            buyerPhone,
+            productStatus: true
+        }
+
+
+
+        //CRUD booking info
+        fetch('http://localhost:5000/bookinginfo', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(bookingInfo)
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                setBookingModal(false)
+            })
+            .catch(error => console.log(error))
+
+    }
+
     return (
         <div className='mt-24 container mx-auto'>
             <h1 className='text-3xl font-semibold font-serif text-slate-600 bg-green-200 p-5 rounded-xl text-center'>Available {categoryName} are shown below!</h1>
@@ -31,7 +80,7 @@ const ProductList = () => {
                             <div className="modal">
                                 <div className="modal-box relative">
                                     <label htmlFor={`my-modal-${product._id}`} className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                                    <figure className=''><img src={product.image} alt="pictures of books" className='rounded' /></figure>
+                                    <figure className=''><img src={product.image} alt="pictures of books" className='rounded h-56' /></figure>
                                     <br />
                                     <h3 className="text-lg font-bold">{product.name}</h3>
                                     <p className='text-thin text-slate-400'><span className=''>Posted On:</span> {product.postDate}</p>
@@ -48,41 +97,42 @@ const ProductList = () => {
                                     <br />
                                     <div className='w-full flex justify-end'>
                                         {/* The button to open BOOK NOW modal */}
-                                        <label htmlFor={`my-booking-${product._id}`} className='btn border-none bg-gradient-to-r from-blue-400 to-lime-100 text-white'>Book Now!</label>
+                                        <label htmlFor={`my-booking-${product._id}`} className='btn border-none bg-gradient-to-r from-blue-500 to-lime-600 text-white opacity-60'>Book Now!</label>
 
                                         {/* Put this part before </body> tag */}
                                         <input type="checkbox" id={`my-booking-${product._id}`} className="modal-toggle" />
                                         <div className="modal">
                                             <div className="modal-box">
-                                                <h3 className="font-thin text-slate-400 text-sm block">Fill out This form to book this Item: <span className='font-bold text-3xl font-serif text-slate-700'> {product.name} </span></h3>
-                                                <div className="avatar">
+                                                <h3 className="font-thin text-slate-400 text-sm block">Fill out the form to book this Item: <span className='font-bold text-2xl font-serif text-slate-700 '> {product.name} </span></h3>
+                                                {/* <div className="avatar">
                                                     <div className="w-24 rounded">
                                                         <img src={product.image} alt="" />
                                                     </div>
-                                                </div>
-                                                <form className="py-4">
+                                                </div> */}
+                                                {/*onSubmit={handleSubmit(handleBooking)}*/}
+                                                <form className="py-6" onSubmit={handleBooking}>
                                                     <br />
-                                                    <label className='font-thin text-slate-400 text-sm block'>Seller Name</label>
-                                                    <input {...register("name")} placeholder="Name" type="text" className='input input-bordered input-sm w-full max-w-xs my-2' defaultValue={product.seller} disabled />
+                                                    <label className='font-thin text-slate-400 text-sm block'>Your Name</label>
+                                                    <input name="buyerName" placeholder="Name" type="text" className='input input-bordered input-sm w-full max-w-xs my-2' value={user?.displayName} disabled />
                                                     <br />
                                                     <label className='font-thin text-slate-400 text-sm block'>Email</label>
-                                                    <input {...register("email")} placeholder="email" type="email" className='input input-bordered input-sm w-full max-w-xs my-2' defaultValue={product.email} disabled />
+                                                    <input name="buyerEmail" placeholder="email" type="email" className='input input-bordered input-sm w-full max-w-xs my-2' defaultValue={user?.email} disabled />
                                                     <br />
                                                     <label className='font-thin text-slate-400 text-sm block'>Item Name</label>
-                                                    <input {...register("name")} placeholder="Name" type="text" className='input input-bordered input-sm w-full max-w-xs my-2' defaultValue={product.name} disabled />
+                                                    <input name="productName" placeholder="Name" type="text" className='input input-bordered input-sm w-full max-w-xs my-2' defaultValue={product.name} disabled />
                                                     <br />
                                                     <label className='font-thin text-slate-400 text-sm block'>Item Re-sale Price</label>
-                                                    <input {...register("price")} placeholder="Price" type="text" className='input input-bordered input-sm w-full max-w-xs my-2' defaultValue={product.resalePrice} disabled />
+                                                    <input name="resalePrice" placeholder="Price" type="text" className='input input-bordered input-sm w-full max-w-xs my-2' defaultValue={product.resalePrice} disabled />
                                                     <br />
                                                     <label className='font-thin text-slate-400 text-sm block'>Meeting Location</label>
-                                                    <input type="text" placeholder="Type here" className="input input-bordered input-md w-full max-w-xs my-2" />
+                                                    <input name="meetingLocation" type="text" placeholder="Type here" className="input input-bordered input-md w-full max-w-xs my-2" />
                                                     <br />
                                                     <label className='font-thin text-slate-400 text-sm block'>Your Mobile Phone Number</label>
-                                                    <input type="number" placeholder="Type here" className="input input-bordered input-md w-full max-w-xs my-2" />
+                                                    <input name="buyerPhone" type="number" placeholder="Moblie Phone Number" className="input input-bordered input-md w-full max-w-xs my-2" required />
                                                     <div className="modal-action">
-                                                        <label htmlFor={`my-booking-${product._id}`} className="">
-                                                            <button className='btn btn-success text-white font-semibold opacity-50'>Submit!</button>
-                                                        </label>
+
+                                                        <input type="submit" value='Confirm Booking' className='btn btn-success text-white font-semibold opacity-50 w-full' />
+
                                                     </div>
                                                 </form>
                                             </div>
