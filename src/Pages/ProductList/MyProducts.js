@@ -15,11 +15,9 @@ const MyProducts = () => {
         }
     })
 
-    console.log("array", myProducts);
-
     return (
-        <div className='mt-20 text-xl font-serif container mx-auto'>
-            <p>{myProducts.length}</p>
+        <div className='mt-24 text-xl font-serif container mx-auto'>
+            <p className='text-center m-8'>Your Total Product Number: {myProducts.length}</p>
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
                     {/* <!-- head --> */}
@@ -40,7 +38,7 @@ const MyProducts = () => {
                         {/* <!-- row 1 --> */}
                         {
                             myProducts.map(product =>
-                                <tr>
+                                <tr key={product._id}>
                                     <th>
                                         <label>
                                             <input type="checkbox" className="checkbox" />
@@ -71,14 +69,14 @@ const MyProducts = () => {
                                     <td>
                                         {
                                             product.adStatus === true ?
-                                                <button className='btn btn-sm bg-green-300 text-black'>Advertise!</button> :
+                                                <button className='btn btn-sm bg-green-300 text-black font-sans'>Advertise!</button> :
                                                 <label>
-                                                    <input type="checkbox" className="checkbox bg-green-300" checked />
+                                                    <input type="checkbox" className="checkbox bg-green-300" defaultChecked />
                                                 </label>
                                         }
                                     </td>
                                     <th>
-                                        <button className="btn btn-ghost btn-xs">details</button>
+                                        <button className="btn btn-ghost bg-red-300 text-slate-600 font-sans">Remove</button>
                                     </th>
                                 </tr>
                             )
