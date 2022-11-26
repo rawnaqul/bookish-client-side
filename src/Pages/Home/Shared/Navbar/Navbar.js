@@ -8,6 +8,8 @@ const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext);
 
+    console.log(user);
+
     const menuItem = <React.Fragment>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/blogs'>Blogs</Link></li>
@@ -38,12 +40,16 @@ const Navbar = () => {
                             <img src={logo} alt=''></img>
                             <h2 className='text-3xl font-semibold font-serif mx-2'>Bookish</h2>
                         </Link>
-
                     </div>
                     <div className="navbar-end hidden lg:flex">
                         <ul className="menu menu-horizontal p-0">
                             {menuItem}
                         </ul>
+                        <div className="avatar">
+                            <div className="w-12 mask mask-squircle">
+                                <img src={user?.photoURL} alt='profile' />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

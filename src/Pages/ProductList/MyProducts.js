@@ -76,7 +76,7 @@ const MyProducts = () => {
                                         }
                                     </td>
                                     <th>
-                                        <button className="btn btn-ghost bg-red-300 text-slate-600 font-sans">Remove</button>
+                                        <button className="btn btn-ghost text-4xl text-slate-600 font-sans">🗑️</button>
                                     </th>
                                 </tr>
                             )

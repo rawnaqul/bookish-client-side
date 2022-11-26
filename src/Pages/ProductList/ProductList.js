@@ -137,17 +137,11 @@ const ProductList = () => {
                                                     <div className="modal-action">
 
                                                         <input type="submit" value='Confirm Booking' className='btn btn-success text-white font-semibold opacity-50 w-full' />
-
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
-
-
-
-
-
                                 </div>
                             </div>
                         </div>

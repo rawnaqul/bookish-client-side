@@ -71,7 +71,10 @@ const AddProduct = () => {
     }
 
     return (
-        <div className='container mx-auto mt-24 lg:w-6/12 w-9/12'>
+        <div className='container mx-auto mt-28 lg:w-4/12 w-6/12'>
+            <h1 className='font-bold font-serif text-4xl text-slate-600'>Add a book to Re-sale!</h1>
+            <p className='text-slate-400'>Make sure to advertise your book!</p>
+            <br />
             <form onSubmit={handleBooking} className='mt-10 grid grid-cols-1 gap-4'>
                 <input name="name" type="text" placeholder="Product Name" className="input input-bordered w-full" />
                 <input name="image" type="text" placeholder="Place your product image link" className="input input-bordered w-full" />
@@ -94,7 +97,7 @@ const AddProduct = () => {
                 </select>
                 <input name="originalPrice" type="number" placeholder="Buying price" className="input input-bordered w-full" />
                 <input name="yearsOfUse" type="number" placeholder="Year of use" className="input input-bordered w-full" />
-                <button className='btn btn-primary text-white'>Submit</button>
+                <button className='btn btn-success bg-green-200 border-2 text-slate-600'>Submit</button>
             </form>
         </div>
     );
