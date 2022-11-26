@@ -29,8 +29,6 @@ const AuthProvider = ({ children }) => {
     //UPDATE USER INFO
     const upadteUserInfo = (userInfo) => {
         setLoader(true)
-        console.log(userInfo);
-        console.log('eta user', user);
         return updateProfile(auth.currentUser, userInfo);
     }
 
@@ -45,7 +43,6 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth,
             (currentUser) => {
-                console.log(currentUser);
                 setUser(currentUser)
                 setLoader(false)
             });
@@ -54,7 +51,7 @@ const AuthProvider = ({ children }) => {
         }
     }, [])
 
-    console.log("checking", user);
+
 
 
     const authInfo = {

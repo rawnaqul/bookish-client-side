@@ -78,9 +78,9 @@ const ProductList = () => {
                             {/* Put this part before </body> tag */}
                             <input type="checkbox" id={`my-modal-${product._id}`} className="modal-toggle" />
                             <div className="modal">
-                                <div className="modal-box relative">
+                                <div className="modal-box h-screen relative">
                                     <label htmlFor={`my-modal-${product._id}`} className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                                    <figure className=''><img src={product.image} alt="pictures of books" className='rounded h-56' /></figure>
+                                    <figure className=''><img src={product.image} alt="pictures of books" className='rounded h-96' /></figure>
                                     <br />
                                     <h3 className="text-lg font-bold">{product.name}</h3>
                                     <p className='text-thin text-slate-400'><span className=''>Posted On:</span> {product.postDate}</p>
@@ -97,7 +97,12 @@ const ProductList = () => {
                                     <br />
                                     <div className='w-full flex justify-end'>
                                         {/* The button to open BOOK NOW modal */}
-                                        <label htmlFor={`my-booking-${product._id}`} className='btn border-none bg-gradient-to-r from-blue-500 to-lime-600 text-white opacity-60'>Book Now!</label>
+                                        {
+                                            product.adStatus === true ?
+                                                <label htmlFor={`my-booking-${product._id}`} className='btn border-none bg-gradient-to-r from-blue-500 to-lime-600 text-white opacity-60'>Book Now!</label>
+                                                :
+                                                <label htmlFor={`my-booking-${product._id}`} className='btn border-none bg-gradient-to-r from-blue-200 to-lime-200 text-white' disabled>Sold!</label>
+                                        }
 
                                         {/* Put this part before </body> tag */}
                                         <input type="checkbox" id={`my-booking-${product._id}`} className="modal-toggle" />
@@ -110,7 +115,7 @@ const ProductList = () => {
                                                     </div>
                                                 </div> */}
                                                 {/*onSubmit={handleSubmit(handleBooking)}*/}
-                                                <form className="py-6" onSubmit={handleBooking}>
+                                                <form className="py-2" onSubmit={handleBooking}>
                                                     <br />
                                                     <label className='font-thin text-slate-400 text-sm block'>Your Name</label>
                                                     <input name="buyerName" placeholder="Name" type="text" className='input input-bordered input-sm w-full max-w-xs my-2' value={user?.displayName} disabled />
