@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../../context/AuthProvider/Authprovider';
 import './Navbar.css'
 import logo from '../../../../book-logo-dark.svg';
-import altImage from '../../../../no-image.png'
+import altImage from '../../../../no-image.png';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
 
@@ -11,12 +12,19 @@ const Navbar = () => {
 
     console.log(user);
 
+    const logOutDone = () => {
+        logOut()
+            .then(() => {
+                toast.success('Successfully Logged Out')
+            })
+    }
+
     const menuItem = <React.Fragment>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/blogs'>Blogs</Link></li>
         <li><Link to='/contact'>Contact Us</Link></li>
         {user ?
-            <li onClick={() => { logOut() }}><Link>Sign Out</Link></li>
+            <li onClick={logOutDone}><Link>Sign Out</Link></li>
             : <>
                 <li><Link to='/login'>Log In</Link></li>
                 <li><Link to='/signup'>Sign Up</Link></li>
