@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthProvider/Authprovider';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
-    console.log("my product page", user);
+    // console.log("my product page", user);
+    const [status, setStatus] = useState();
 
     //FIND PRODUCT BASED ON EMAIL
     const { data: myProducts = [] } = useQuery({
@@ -26,11 +27,32 @@ const MyProducts = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    // console.log(data);
                     if (data.deletedCount > 0) {
                         alert('Removed successfully');
                         const remaining = myProducts.filter(odr => odr._id !== id);
                         myProducts(remaining);
+                    }
+                })
+        }
+    }
+
+
+    //PRODUCT STATUS CHANGE
+    const handleStatusChange = (id, status) => {
+        const proceed = window.confirm('Change product status to Sold?');
+        if (proceed) {
+            fetch(`http://localhost:5000/products/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({ status: !status })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.modifiedCount > 0) {
+                        alert('Status Updated');
                     }
                 })
         }
@@ -79,17 +101,20 @@ const MyProducts = () => {
                                         </div>
                                     </td>
                                     <td>
-                                        {product.adStatus === true ? "Available!" : "Sold."}
+                                        {product.status === true ?
+                                            <button onClick={() => { handleStatusChange(product._id, product.status) }} className='btn btn-link'>Available</button>
+                                            :
+                                            <button className='btn btn-link  text-black'>Sold!</button>}
                                         <br />
-                                        {
-                                            product.adStatus === true ?
+                                        {/* {
+                                            product.status === true ?
                                                 <span className="badge badge-ghost badge-sm bg-green-200 font-sans p-3">Advertise this product</span> :
                                                 <span className="badge badge-ghost badge-sm bg-red-200 font-sans p-3">Already Sold!</span>
-                                        }
+                                        } */}
                                     </td>
                                     <td>
                                         {
-                                            product.adStatus === true ?
+                                            product.status === true ?
                                                 <button className='btn btn-sm bg-green-300 text-black font-sans'>Advertise!</button> :
                                                 <label>
                                                     <input type="checkbox" className="checkbox bg-green-300" defaultChecked />
