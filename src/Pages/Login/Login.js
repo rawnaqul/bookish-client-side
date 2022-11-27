@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/Authprovider';
+import toast from 'react-hot-toast';
 
 const Login = () => {
 
@@ -15,6 +16,9 @@ const Login = () => {
         signIn(data.email, data.password)
             .then(result => {
                 const user = result.user;
+                if (user) {
+                    toast.success('Log In Done!')
+                }
                 // console.log(user);
             })
             .catch(error => console.error(error));

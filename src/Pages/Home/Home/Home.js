@@ -15,7 +15,7 @@ const Home = () => {
             </section>
 
             <br />
-            <div className='container mx-auto'>
+            <div className='container mx-auto my-24'>
                 <h2 className='text-5xl font-semibold text-center font-serif'>Browse Product Categories</h2>
                 <br />
                 <Categories

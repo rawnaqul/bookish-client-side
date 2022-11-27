@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../../context/AuthProvider/Authprovider';
 import './Navbar.css'
-import logo from '../../../../book-logo-dark.svg'
+import logo from '../../../../book-logo-dark.svg';
+import altImage from '../../../../no-image.png'
 
 const Navbar = () => {
 
@@ -47,7 +48,7 @@ const Navbar = () => {
                         </ul>
                         <div className="avatar">
                             <div className="w-12 mask mask-squircle">
-                                <img src={user?.photoURL} alt='profile' />
+                                <img src={user ? user.photoURL : altImage} alt='' />
                             </div>
                         </div>
                     </div>

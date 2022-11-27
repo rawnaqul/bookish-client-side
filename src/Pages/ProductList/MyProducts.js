@@ -17,7 +17,7 @@ const MyProducts = () => {
 
     return (
         <div className='mt-24 text-xl font-serif container mx-auto'>
-            <p className='text-center m-8'>Your Total Product Number: {myProducts.length}</p>
+            <p className='text-center m-8'>Your Total Product Count: <span className='text-5xl ml-1'>{myProducts.length}</span></p>
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
                     {/* <!-- head --> */}

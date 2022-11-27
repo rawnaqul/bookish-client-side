@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/Authprovider';
 import toast from 'react-hot-toast';
+import { success } from 'daisyui/src/colors';
 
 const Signup = () => {
 
@@ -19,7 +20,7 @@ const Signup = () => {
         createUser(data.email, data.password)
             .then(result => {
                 if (result.user) {
-                    toast.success('kaam hoise')
+                    toast.success('Sign Up Done!')
                 }
                 const userInfo = {
                     displayName: data.name,
