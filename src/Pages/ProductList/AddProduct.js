@@ -49,8 +49,8 @@ const AddProduct = () => {
             yearOfPurchase,
             resalePrice,
             category,
-            status: 'available',
-            adStatus: true,
+            status: true,
+            adStatus: false,
             verifySeller: '',
             originalPrice,
             yearsOfUse,
@@ -65,7 +65,7 @@ const AddProduct = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
             })
             .catch(error => console.log(error))
     }

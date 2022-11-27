@@ -48,7 +48,7 @@ const Navbar = () => {
                             <h2 className='text-3xl font-semibold font-serif mx-2'>Bookish</h2>
                         </Link>
                     </div>
-                    <div className="navbar-end hidden lg:flex">
+                    <div className="navbar-end hidden lg:flex ">
                         <ul className="menu menu-horizontal p-0">
                             {menuItem}
                         </ul>

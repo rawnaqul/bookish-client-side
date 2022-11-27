@@ -6,6 +6,7 @@ const MyProducts = () => {
     const { user } = useContext(AuthContext);
     console.log("my product page", user);
 
+    //FIND PRODUCT BASED ON EMAIL
     const { data: myProducts = [] } = useQuery({
         queryKey: ['products', user?.email],
         queryFn: async () => {
@@ -14,6 +15,26 @@ const MyProducts = () => {
             return data
         }
     })
+
+
+    //REMOVE ACTION
+    const handleRemoval = (id) => {
+        const proceed = window.confirm('Click Okay to remove this product!');
+        if (proceed) {
+            fetch(`http://localhost:5000/products/${id}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.deletedCount > 0) {
+                        alert('Removed successfully');
+                        const remaining = myProducts.filter(odr => odr._id !== id);
+                        myProducts(remaining);
+                    }
+                })
+        }
+    }
 
     return (
         <div className='mt-24 text-xl font-serif container mx-auto'>
@@ -76,7 +97,7 @@ const MyProducts = () => {
                                         }
                                     </td>
                                     <th>
-                                        <button className="btn btn-ghost text-4xl text-slate-600 font-sans">🗑️</button>
+                                        <button onClick={() => { handleRemoval(product._id) }} className="btn btn-ghost text-4xl text-slate-600 font-sans">🗑️</button>
                                     </th>
                                 </tr>
                             )
