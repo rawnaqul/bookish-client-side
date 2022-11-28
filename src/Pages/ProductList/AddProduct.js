@@ -56,7 +56,7 @@ const AddProduct = () => {
             yearsOfUse,
         }
 
-        fetch('http://localhost:5000/products', {
+        fetch('https://server-bice-beta.vercel.app/products', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -65,7 +65,9 @@ const AddProduct = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data);
+                if (data) {
+                    alert('Product added!')
+                }
             })
             .catch(error => console.log(error))
     }
