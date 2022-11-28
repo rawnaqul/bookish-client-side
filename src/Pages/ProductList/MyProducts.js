@@ -1,11 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useState } from 'react';
+import React, { useContext, } from 'react';
 import { AuthContext } from '../../context/AuthProvider/Authprovider';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
     // console.log("my product page", user);
-    const [status, setStatus] = useState();
 
     //FIND PRODUCT BASED ON EMAIL
     const { data: myProducts = [] } = useQuery({
@@ -57,6 +56,27 @@ const MyProducts = () => {
                 })
         }
     }
+    //PUT UP A PRODUCT FOR ADVERTISE
+    const handleAdvertise = (id, status) => {
+        const proceed = window.confirm('Do you want advertise your product in the front page?');
+        console.log(id, status);
+
+        if (proceed) {
+            fetch(`http://localhost:5000/advertise/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({ adStatus: !status })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.modifiedCount > 0) {
+                        alert('Product is now featured in the homepage!');
+                    }
+                })
+        }
+    }
 
     return (
         <div className='mt-24 text-xl font-serif container mx-auto'>
@@ -80,11 +100,12 @@ const MyProducts = () => {
                     <tbody>
                         {/* <!-- row 1 --> */}
                         {
-                            myProducts.map(product =>
-                                <tr key={product._id}>
+                            myProducts.map((product, i) =>
+                                <tr key={product._id} i={i}>
                                     <th>
                                         <label>
-                                            <input type="checkbox" className="checkbox" />
+                                            {/* <input type="checkbox" className="checkbox" /> */}
+                                            <span className='font-sans text-slate-400'>{i + 1}</span>
                                         </label>
                                     </th>
                                     <td>
@@ -115,14 +136,12 @@ const MyProducts = () => {
                                     <td>
                                         {
                                             product.status === true ?
-                                                <button className='btn btn-sm bg-green-300 text-black font-sans'>Advertise!</button> :
-                                                <label>
-                                                    <input type="checkbox" className="checkbox bg-green-300" defaultChecked />
-                                                </label>
+                                                <button onClick={() => { handleAdvertise(product._id, product.adStatus) }} className='btn btn-sm bg-green-300 text-black font-sans'>Advertise!</button> :
+                                                <button className='btn btn-sm bg-green-300 text-black font-sans' disabled>Advertise!</button>
                                         }
                                     </td>
                                     <th>
-                                        <button onClick={() => { handleRemoval(product._id) }} className="btn btn-ghost text-4xl text-slate-600 font-sans">🗑️</button>
+                                        <button onClick={() => { handleRemoval(product._id) }} className="btn btn-ghost text-3xl text-slate-200 font-sans" alt="DELETE">🗑️</button>
                                     </th>
                                 </tr>
                             )
