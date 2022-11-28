@@ -30,34 +30,6 @@ const Home = () => {
                 <br />
                 <Advertised></Advertised>
             </div>
-            <br />
-            <div className='container mx-auto my-24'>
-                <h2 className='text-5xl font-semibold text-center font-serif'>Our Featured Items!</h2>
-                <br />
-                <div className="carousel carousel-center p-4 space-x-4 bg-neutral rounded-box">
-                    <div className="carousel-item">
-                        <img src="https://placeimg.com/250/180/arch" className="rounded-box" />
-                    </div>
-                    <div className="carousel-item">
-                        <img src="https://placeimg.com/250/180/arch" className="rounded-box" />
-                    </div>
-                    <div className="carousel-item">
-                        <img src="https://placeimg.com/250/180/arch" className="rounded-box" />
-                    </div>
-                    <div className="carousel-item">
-                        <img src="https://placeimg.com/250/180/arch" className="rounded-box" />
-                    </div>
-                    <div className="carousel-item">
-                        <img src="https://placeimg.com/250/180/arch" className="rounded-box" />
-                    </div>
-                    <div className="carousel-item">
-                        <img src="https://placeimg.com/250/180/arch" className="rounded-box" />
-                    </div>
-                    <div className="carousel-item">
-                        <img src="https://placeimg.com/250/180/arch" className="rounded-box" />
-                    </div>
-                </div>
-            </div>
 
             <br />
 

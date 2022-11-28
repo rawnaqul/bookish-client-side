@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import AddProduct from './AddProduct';
 
 const Advertised = () => {
 
@@ -14,22 +15,23 @@ const Advertised = () => {
     })
     console.log(myProducts);
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 mt-24 container mx-auto'>
+        <div className="carousel carousel-center p-4 space-x-4 rounded-box bg-slate-200 h-96 lg:h-[600px]">
             {
-                myProducts.map(adProduct => <div className="card w-96 bg-base-100 shadow-xl">
-                    <figure><img src={adProduct.image} alt="Shoes" /></figure>
-                    <div className="card-body">
-                        <h2 className="card-title">
-                            {adProduct.name}!
-                            <div className="badge badge-secondary">OLD BOOK for resale!</div>
-                        </h2>
-                        <p>{adProduct.description}</p>
-                        <div className="card-actions justify-end">
-                            <div className="badge badge-outline">Fashion</div>
-                            <div className="badge badge-outline">Products</div>
-                        </div>
+                myProducts.map(adProduct =>
+                    <div key={adProduct._id} className="carousel-item">
+                        <img src={adProduct.image} alt="advertisement" className="rounded-box" />
+                        {/* <div className="card w-96 bg-base-100 shadow-xl image-full ">
+                            <figure><img src={adProduct.image} alt="Shoes" /></figure>
+                            <div className="card-body">
+                                <h2 className="card-title">Shoes!</h2>
+                                <p>If a dog chews shoes whose shoes does he choose?</p>
+                                <div className="card-actions justify-end">
+                                    <button className="btn btn-primary">Buy Now</button>
+                                </div>
+                            </div>
+                        </div> */}
                     </div>
-                </div>)
+                )
             }
         </div>
     );

@@ -56,10 +56,10 @@ const MyProducts = () => {
                 })
         }
     }
+
     //PUT UP A PRODUCT FOR ADVERTISE
     const handleAdvertise = (id, status) => {
         const proceed = window.confirm('Do you want advertise your product in the front page?');
-        console.log(id, status);
 
         if (proceed) {
             fetch(`http://localhost:5000/advertise/${id}`, {
