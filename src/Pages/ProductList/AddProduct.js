@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthProvider/Authprovider';
 
 const AddProduct = () => {
@@ -66,7 +67,7 @@ const AddProduct = () => {
             .then(res => res.json())
             .then(data => {
                 if (data) {
-                    alert('Product added!')
+                    toast.success('Product added!')
                 }
             })
             .catch(error => console.log(error))

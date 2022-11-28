@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthProvider/Authprovider';
 
 const MyProducts = () => {
@@ -72,7 +73,7 @@ const MyProducts = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.modifiedCount > 0) {
-                        alert('Product is now featured in the homepage!');
+                        toast.success('Product is now featured in the homepage!');
                     }
                 })
         }
