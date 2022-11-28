@@ -1,19 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/Authprovider';
 import toast from 'react-hot-toast';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const googleProvider = new GoogleAuthProvider();
 
+    const [error, setError] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/'
 
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn, providerLogin } = useContext(AuthContext);
 
     const handleLogIn = (data) => {
         // console.log(data);
@@ -27,6 +30,18 @@ const Login = () => {
                 // console.log(user);
             })
             .catch(error => console.error(error));
+    }
+
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                console.log(result);
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.error(error)
+                setError(error.message)
+            })
     }
 
 
@@ -46,11 +61,11 @@ const Login = () => {
                     <br />
                     <button className='btn bg-slate-600/[.9]'>Log In</button>
                     <br />
-                    <p className='text-sm'> New to doctors portal? <span className='text-blue-400'><Link to='/signup'>Creat New Account Here.</Link></span> </p>
-                    <div className='divider'>Or</div>
-                    <button className='btn btn-outline'>Continue with Google</button>
+                    <p className='text-sm'> New to Bookish Hub? <span className='text-blue-400'><Link to='/signup'>Creat New Account Here.</Link></span> </p>
                 </form>
                 <br />
+                <div className='divider'>Or</div>
+                <button onClick={handleGoogleSignIn} className='btn btn-outline'>Continue with Google</button>
             </div>
         </div>
     );
