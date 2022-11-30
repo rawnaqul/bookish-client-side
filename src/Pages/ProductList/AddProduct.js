@@ -57,7 +57,7 @@ const AddProduct = () => {
             yearsOfUse,
         }
 
-        fetch('https://server-bice-beta.vercel.app/products', {
+        fetch('http://localhost:5000/products', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -82,7 +82,7 @@ const AddProduct = () => {
                 <input name="name" type="text" placeholder="Product Name" className="input input-bordered w-full" />
                 <input name="image" type="text" placeholder="Place your product image link" className="input input-bordered w-full" />
                 <select name='condition' className="select select-bordered w-full" required>
-                    <option disabled selected>Select your product condition</option>
+                    <option disabled >Select your product condition</option>
                     <option>Excelent</option>
                     <option>Good</option>
                     <option>Fair</option>
@@ -93,7 +93,7 @@ const AddProduct = () => {
                 <input name="yearOfPurchase" type="number" placeholder="Purchase year" className="input input-bordered w-full" />
                 <input name="resalePrice" type="number" placeholder="Selling price" className="input input-bordered w-full" />
                 <select name='category' className="select select-bordered w-full" required>
-                    <option disabled selected>Select the category</option>
+                    <option disabled>Select the category</option>
                     <option>Second-hand Books</option>
                     <option>Collectible Books</option>
                     <option>Old Magazines</option>

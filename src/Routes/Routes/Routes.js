@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layout/Main";
+import Blog from "../../Pages/Blog/Blog";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import AddProduct from "../../Pages/ProductList/AddProduct";
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 loader: async () => {
-                    return fetch('https://server-bice-beta.vercel.app/categories')
+                    return fetch('http://localhost:5000/categories')
                 },
                 element: <Home></Home>
             },
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
             {
                 path: '/productlist/:id',
                 loader: async ({ params }) => {
-                    return fetch(`https://server-bice-beta.vercel.app/products/${params.id}`)
+                    return fetch(`http://localhost:5000/products/${params.id}`)
                 },
                 element: <ProductList></ProductList>,
             },
@@ -44,7 +45,15 @@ const router = createBrowserRouter([
                 path: '/myproducts',
                 element: <MyProducts></MyProducts>
             },
+            {
+                path: '/blogs',
+                element: <Blog></Blog>
+            },
         ]
+    },
+    {
+        path: '*',
+        element: <div><h1>this link does not exist</h1></div>
     }
 ])
 

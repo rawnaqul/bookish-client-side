@@ -5,15 +5,23 @@ import './Navbar.css'
 import logo from '../../../../book-logo-dark.svg';
 import altImage from '../../../../no-image.png';
 import toast from 'react-hot-toast';
+import { useUserVerify } from '../../../../useVerification/useUserVerify';
+
 
 const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext);
+    const [isSeller, isBuyer, isAdmin, isUserLoading] = useUserVerify(user?.email);
+
+
+
+
 
     const logOutDone = () => {
         logOut()
             .then(() => {
                 toast.success('Successfully Logged Out')
+                localStorage.removeItem('accessToken')
             })
     }
 
@@ -27,6 +35,44 @@ const Navbar = () => {
                 <li><Link to='/login'>Log In</Link></li>
                 <li><Link to='/signup'>Sign Up</Link></li>
             </>}
+        {isSeller &&
+            <>
+                <li className="dropdown dropdown-bottom dropdown-end">
+                    <label tabIndex={0} className="m-1">Dashboard
+                        <span className="badge badge-ghost badge-xs bg-green-200 font-sans text-[10px] p-3">Seller</span>
+                    </label>
+                    <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <li><Link to='/myproducts'>My Products</Link></li>
+                        <li><Link to='/addproduct'>Add Products</Link></li>
+                    </ul>
+                </li>
+            </>
+        }
+        {isBuyer &&
+            <>
+                <li className="dropdown dropdown-bottom dropdown-end">
+                    <label tabIndex={0} className="m-1">Dashboard
+                        <span className="badge badge-ghost badge-xs bg-green-200 font-sans text-[10px] p-3">Buyer</span>
+                    </label>
+                    <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <li><Link>my Wishlist</Link></li>
+                        <li><Link>My Bookings</Link></li>
+                    </ul>
+                </li>
+            </>
+        }
+        {isAdmin &&
+            <>
+                <li className="dropdown dropdown-bottom dropdown-end">
+                    <label tabIndex={0} className="m-1">Dashboard<span className="badge badge-ghost badge-xs bg-green-200 font-sans text-[10px] p-3">Admin</span>
+                    </label>
+                    <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <li><Link>All Seller</Link></li>
+                        <li><Link>All Buyer</Link></li>
+                    </ul>
+                </li>
+            </>
+        }
     </React.Fragment>
 
     return (

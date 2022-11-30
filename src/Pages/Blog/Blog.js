@@ -1,13 +1,11 @@
 import React from 'react';
-import TabTitle from '../Shared/TabTitle';
+
 
 
 
 
 
 const Blog = () => {
-
-    TabTitle('Blog')
 
 
     return (

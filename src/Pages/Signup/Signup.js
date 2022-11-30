@@ -44,7 +44,7 @@ const Signup = () => {
     const storeUser = (name, email, userRole) => {
         const user = { name, email, userRole, verified: false };
 
-        fetch('https://server-bice-beta.vercel.app/users', {
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -75,9 +75,9 @@ const Signup = () => {
 
                     <div className='py-3'>
                         <select {...register("userRole", { required: 'This Field is required' })} className="select select-bordered w-full my-4" placeholder='Sign Up as...'>
-                            <option value="">Sign Up...</option>
-                            <option value="Buyer">Buyer</option>
-                            <option value="Seller">Seller</option>
+
+                            <option defaultValue={"buyer"} >Buyer</option>
+                            <option value="seller">Seller</option>
                         </select>
                         {errors.userRole && <p className='text-right text-red-600 my-1 text-xs'>{errors.userRole?.message}</p>}
                     </div>
