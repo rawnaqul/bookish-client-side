@@ -42,7 +42,7 @@ const ProductList = () => {
 
 
         //CRUD booking info
-        fetch('http://localhost:5000/bookinginfo', {
+        fetch('https://server-bice-beta.vercel.app/bookinginfo', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

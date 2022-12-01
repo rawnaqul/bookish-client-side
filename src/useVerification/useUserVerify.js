@@ -11,7 +11,7 @@ export const useUserVerify = (user) => {
     useEffect(() => {
         if (user) {
             console.log(user.email);
-            fetch(`http://localhost:5000/user/${user?.email}`)
+            fetch(`https://server-bice-beta.vercel.app/user/${user?.email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log("indicator", data.userRole);

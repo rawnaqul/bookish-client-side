@@ -47,7 +47,7 @@ const Signup = () => {
         console.log("STORE", name, email, userRole);
         const user = { name, email, userRole, verified: false };
 
-        fetch('http://localhost:5000/users', {
+        fetch('https://server-bice-beta.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

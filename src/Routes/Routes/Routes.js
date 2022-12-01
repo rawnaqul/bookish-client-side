@@ -20,7 +20,7 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 loader: async () => {
-                    return fetch('http://localhost:5000/categories')
+                    return fetch('https://server-bice-beta.vercel.app/categories')
                 },
                 element: <Home></Home>
             },
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
             {
                 path: '/productlist/:id',
                 loader: async ({ params }) => {
-                    return fetch(`http://localhost:5000/products/${params.id}`)
+                    return fetch(`https://server-bice-beta.vercel.app/products/${params.id}`)
                 },
                 element: <ProductList></ProductList>,
             },

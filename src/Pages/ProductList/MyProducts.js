@@ -11,7 +11,7 @@ const MyProducts = () => {
     const { data: myProducts = [] } = useQuery({
         queryKey: ['products', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/products/?email=${user?.email}`);
+            const res = await fetch(`https://server-bice-beta.vercel.app/products/?email=${user?.email}`);
             const data = await res.json();
             return data
         }
@@ -22,7 +22,7 @@ const MyProducts = () => {
     const handleRemoval = (id) => {
         const proceed = window.confirm('Click Okay to remove this product!');
         if (proceed) {
-            fetch(`http://localhost:5000/products/${id}`, {
+            fetch(`https://server-bice-beta.vercel.app/products/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -42,7 +42,7 @@ const MyProducts = () => {
     const handleStatusChange = (id, status) => {
         const proceed = window.confirm('Change product status to Sold?');
         if (proceed) {
-            fetch(`http://localhost:5000/products/${id}`, {
+            fetch(`https://server-bice-beta.vercel.app/products/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json'
@@ -63,7 +63,7 @@ const MyProducts = () => {
         const proceed = window.confirm('Do you want advertise your product in the front page?');
 
         if (proceed) {
-            fetch(`http://localhost:5000/advertise/${id}`, {
+            fetch(`https://server-bice-beta.vercel.app/advertise/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json'
