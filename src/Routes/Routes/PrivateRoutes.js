@@ -5,14 +5,14 @@ import { AuthContext } from '../../context/AuthProvider/Authprovider';
 
 const PrivateRoutes = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
-    const location = useLocation();
+    // const location = useLocation();
 
     if (loading) {
         return <Loader></Loader>
     }
 
     if (!user) {
-        return <Navigate to="/dashboard" state={{ from: location }} replace></Navigate>;
+        // return <Navigate to="/dashboard" state={{ from: location }} replace></Navigate>;
     }
     return children;
 };

@@ -17,7 +17,7 @@ const useToken = (email) => {
         }
     }, [email])
 
-
+    console.log(token);
     return [token];
 
 };

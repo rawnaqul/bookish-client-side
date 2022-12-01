@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/Authprovider';
@@ -12,7 +12,7 @@ const Login = () => {
     const googleProvider = new GoogleAuthProvider();
 
     const [newUserEmail, setNewUserEmail] = useState('');
-    const [token] = useToken(newUserEmail);
+    // const [token] = useToken(newUserEmail);
 
 
     const [error, setError] = useState('');
@@ -20,11 +20,11 @@ const Login = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || '/'
 
-    if (token) {
-        // navigate(from, { replace: true })
-        navigate('/')
-        toast.success('token mil geya')
-    }
+    // if (token) {
+    //     // navigate(from, { replace: true })
+    //     toast.success('token mil geya')
+    //     navigate('/')
+    // }
 
 
     const { signIn, providerLogin } = useContext(AuthContext);
@@ -36,7 +36,8 @@ const Login = () => {
                 const user = result.user;
                 if (user) {
                     setNewUserEmail(data.email);
-                    toast.success('Log In Done!')
+                    // toast.success('Log In Done!')
+                    console.log("Login is Done");
                 }
                 // console.log(user);
             })
@@ -54,6 +55,27 @@ const Login = () => {
                 console.error(error)
                 setError(error.message)
             })
+    }
+
+    const [token, setToken] = useState('');
+
+    useEffect(() => {
+        if (newUserEmail) {
+            fetch(`https://server-bice-beta.vercel.app/jwt?email=${newUserEmail}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.accessToken) {
+                        localStorage.setItem('accessToken', data.accessToken);
+                        setToken(data.accessToken);
+                        console.log('useeffecct token');
+                        // navigate('/')
+                    }
+                });
+        }
+    }, [newUserEmail])
+
+    if (token) {
+        console.log(token);
     }
 
 

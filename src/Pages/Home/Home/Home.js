@@ -34,7 +34,7 @@ const Home = () => {
             <br />
 
             {/* Contact starts */}
-            <section>
+            <section id='cta-sec'>
                 <Contact></Contact>
             </section>
         </div>

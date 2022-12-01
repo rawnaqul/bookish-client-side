@@ -4,7 +4,7 @@ import './Home.css'
 
 const Contact = () => {
     return (
-        <div className='background-image-cta bg-no-repeat bg-cover p-24'>
+        <div className='background-image-cta bg-no-repeat bg-cover p-24 mt-[65px]'>
             <div className='container mx-auto text-center border-4 border-white p-24'>
                 <div className='my-auto mb-10' >
                     <h4 className='font-bold text-2xl text-orange-600 mb-5 font-serif'>Contact Us</h4>

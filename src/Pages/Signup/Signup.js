@@ -9,9 +9,9 @@ const Signup = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [signUpError, setSignUpError] = useState('');
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || '/'
+    // const navigate = useNavigate();
+    // const location = useLocation();
+    // const from = location.state?.from?.pathname || '/'
 
     const { createUser, upadteUserInfo, setLoader } = useContext(AuthContext);
 
@@ -59,7 +59,7 @@ const Signup = () => {
                 setLoader(false)
                 console.log(data);
                 // navigate(from, { replace: true })
-                navigate('/')
+                // navigate('/')
             })
             .catch(error => console.log(error))
     }
