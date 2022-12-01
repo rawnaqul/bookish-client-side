@@ -1,17 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../../context/AuthProvider/Authprovider';
 import './Navbar.css'
 import logo from '../../../../book-logo-dark.svg';
 import altImage from '../../../../no-image.png';
 import toast from 'react-hot-toast';
-import { useUserVerify } from '../../../../useVerification/useUserVerify';
+// import { useUserVerify } from '../../../../useVerification/useUserVerify';
 
 
 const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext);
-    const [isSeller, isBuyer, isAdmin, isUserLoading] = useUserVerify(user?.email);
+    console.log(user);
+    // const [isSeller, isBuyer, isAdmin, isUserLoading] = useUserVerify(user?.email);
 
 
 
@@ -30,12 +31,14 @@ const Navbar = () => {
         <li><Link to='/blogs'>Blogs</Link></li>
         <li><Link to='/contact'>Contact Us</Link></li>
         {user ?
-            <li onClick={logOutDone}><Link>Sign Out</Link></li>
+            <>
+                <li><Link to='/dashboard'>Dashboard</Link></li>
+                <li onClick={logOutDone}><Link>Sign Out</Link></li></>
             : <>
                 <li><Link to='/login'>Log In</Link></li>
                 <li><Link to='/signup'>Sign Up</Link></li>
             </>}
-        {isSeller &&
+        {/* {isSeller &&
             <>
                 <li className="dropdown dropdown-bottom dropdown-end">
                     <label tabIndex={0} className="m-1">Dashboard
@@ -55,8 +58,8 @@ const Navbar = () => {
                         <span className="badge badge-ghost badge-xs bg-green-200 font-sans text-[10px] p-3">Buyer</span>
                     </label>
                     <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><Link>my Wishlist</Link></li>
-                        <li><Link>My Bookings</Link></li>
+                        <li><Link to="/">my Wishlist</Link></li>
+                        <li><Link to='/'>My Bookings</Link></li>
                     </ul>
                 </li>
             </>
@@ -67,13 +70,14 @@ const Navbar = () => {
                     <label tabIndex={0} className="m-1">Dashboard<span className="badge badge-ghost badge-xs bg-green-200 font-sans text-[10px] p-3">Admin</span>
                     </label>
                     <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><Link>All Seller</Link></li>
-                        <li><Link>All Buyer</Link></li>
+                        <li><Link to='/'>All Seller</Link></li>
+                        <li><Link to='/'>All Buyer</Link></li>
                     </ul>
                 </li>
             </>
-        }
+        } */}
     </React.Fragment>
+    // console.log(user.photoURL);
 
     return (
 

@@ -13,9 +13,10 @@ const Signup = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || '/'
 
-    const { createUser, upadteUserInfo } = useContext(AuthContext);
+    const { createUser, upadteUserInfo, setLoader } = useContext(AuthContext);
 
     const handleSignUp = (data) => {
+        console.log(data);
         setSignUpError('')
         createUser(data.email, data.password)
             .then(result => {
@@ -30,6 +31,7 @@ const Signup = () => {
                 upadteUserInfo(userInfo)
                     .then(() => {
                         storeUser(data.name, data.email, data.userRole)
+                        console.log('ne user role', data.userRole);
                     })
                     .catch(err => { console.error(err) })
 
@@ -42,6 +44,7 @@ const Signup = () => {
 
     //SAVE USER DATA IN DATABASE
     const storeUser = (name, email, userRole) => {
+        console.log("STORE", name, email, userRole);
         const user = { name, email, userRole, verified: false };
 
         fetch('http://localhost:5000/users', {
@@ -53,7 +56,10 @@ const Signup = () => {
         })
             .then(res => res.json())
             .then(data => {
-                navigate(from, { replace: true })
+                setLoader(false)
+                console.log(data);
+                // navigate(from, { replace: true })
+                navigate('/')
             })
             .catch(error => console.log(error))
     }
@@ -75,9 +81,8 @@ const Signup = () => {
 
                     <div className='py-3'>
                         <select {...register("userRole", { required: 'This Field is required' })} className="select select-bordered w-full my-4" placeholder='Sign Up as...'>
-
-                            <option defaultValue={"buyer"} >Buyer</option>
-                            <option value="seller">Seller</option>
+                            <option defaultValue="buyer" >buyer</option>
+                            <option value="seller">seller</option>
                         </select>
                         {errors.userRole && <p className='text-right text-red-600 my-1 text-xs'>{errors.userRole?.message}</p>}
                     </div>

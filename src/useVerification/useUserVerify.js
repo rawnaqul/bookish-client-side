@@ -1,35 +1,36 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
-export const useUserVerify = email => {
+export const useUserVerify = (user) => {
+    console.log(user);
     const [isSeller, setIsSeller] = useState(false);
     const [isBuyer, setIsBuyer] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
-    const [isUserLoading, setIsUserLoading] = useState(false);
+    const [isUserLoading, setIsUserLoading] = useState(true);
 
     useEffect(() => {
-        if (email) {
-            setIsUserLoading(true)
-            fetch(`http://localhost:5000/user/${email}`, {
-                headers: {
-                    authorization: `bearer ${localStorage.getItem('accessToken')}`
-                }
-            })
+        if (user) {
+            console.log(user.email);
+            fetch(`http://localhost:5000/user/${user?.email}`)
                 .then(res => res.json())
                 .then(data => {
+                    console.log("indicator", data.userRole);
+
                     if (data.userRole === 'buyer') {
                         setIsBuyer(true)
                     }
                     if (data.userRole === 'seller') {
                         setIsSeller(true)
                     }
-                    if (data.userRole === 'admin') {
+                    if (data.userRole === "admin") {
+
                         setIsAdmin(true)
                     }
-
                     setIsUserLoading(false);
                 })
         }
-    }, [email])
+    }, [user]);
+    console.log(isSeller, isBuyer, isAdmin);
 
     return [isSeller, isBuyer, isAdmin, isUserLoading]
 

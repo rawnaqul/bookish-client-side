@@ -21,7 +21,9 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/'
 
     if (token) {
-        navigate(from, { replace: true })
+        // navigate(from, { replace: true })
+        navigate('/')
+        toast.success('token mil geya')
     }
 
 
@@ -68,6 +70,8 @@ const Login = () => {
                     <input {...register("password", { required: "Set a Password", minLength: { value: 6, message: "Minimum 6 charachter required" } })} placeholder="Password" type="password" className='input input-bordered w-full' />
                     {errors.password && <p className='text-sm text-red-500 text-left mt-2 ml-1' role="alert">{errors.password?.message}</p>}
                     <Link className='text-sm text-orange-400 my-2 text-left'>Forgot Password?</Link>
+                    <br />
+                    <p className='text-center text-red-600'>{error}</p>
                     <br />
                     <button className='btn bg-slate-600/[.9]'>Log In</button>
                     <br />
