@@ -50,8 +50,8 @@ const Dashboard = () => {
                                 <span className="badge badge-ghost badge-xs bg-green-200 font-sans text-[10px] p-2 ml-3">Buyer</span>
                             </label>
                             <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                                <li><Link to="/">my Wishlist</Link></li>
-                                <li><Link to='/'>My Bookings</Link></li>
+                                <li><Link to="/dashboard/mywishlist">My Wishlist</Link></li>
+                                <li><Link to='/dashboard/mybookings'>My Bookings</Link></li>
                             </ul>
                         </li>
                     </>
@@ -64,8 +64,8 @@ const Dashboard = () => {
                                 <span className="badge badge-ghost badge-xs bg-green-200 font-sans text-[10px] p-2 ml-3">Admin</span>
                             </label>
                             <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                                <li><Link to='/'>All Seller</Link></li>
-                                <li><Link to='/'>All Buyer</Link></li>
+                                <li><Link to='/dashboard/allbuyers'>All Buyers</Link></li>
+                                <li><Link to='/dashboard/allsellers'>All Sellers</Link></li>
                             </ul>
                         </li>
                     </>

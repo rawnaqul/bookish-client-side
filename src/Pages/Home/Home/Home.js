@@ -27,6 +27,7 @@ const Home = () => {
             <br />
             <div className='container mx-auto my-24'>
                 <h2 className='text-5xl font-semibold text-center font-serif'>Our Featured Items!</h2>
+                <p></p>
                 <br />
                 <Advertised></Advertised>
             </div>

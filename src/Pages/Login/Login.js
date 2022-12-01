@@ -36,8 +36,9 @@ const Login = () => {
                 const user = result.user;
                 if (user) {
                     setNewUserEmail(data.email);
-                    // toast.success('Log In Done!')
-                    console.log("Login is Done");
+                    toast.success('Log In Done!')
+                    // console.log("Login is Done");
+                    navigate('/')
                 }
                 // console.log(user);
             })
@@ -67,7 +68,7 @@ const Login = () => {
                     if (data.accessToken) {
                         localStorage.setItem('accessToken', data.accessToken);
                         setToken(data.accessToken);
-                        console.log('useeffecct token');
+                        // console.log('useeffecct token');
                         // navigate('/')
                     }
                 });

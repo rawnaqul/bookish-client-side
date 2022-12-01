@@ -1,11 +1,11 @@
 import React from 'react';
 
-const AllBuyers = () => {
+const MyBookings = () => {
     return (
         <div>
-            ALL BUYERS HERE
+            buyers Bookings
         </div>
     );
 };
 
-export default AllBuyers;
+export default MyBookings;
