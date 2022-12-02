@@ -9,7 +9,7 @@ const Blog = () => {
 
 
     return (
-        <div className='container mx-auto grid gap-5 grid-cols-1 md:grid-cols-2 '>
+        <div className='container mx-auto grid gap-5 grid-cols-1 md:grid-cols-2 mt-[100px] '>
             <div className="card w-full glass">
                 <figure><img src="https://i.postimg.cc/YCXpXMpn/pexels-sergei-starostin-6466141.jpg" alt="some boring text" /></figure>
                 <div className="card-body">
